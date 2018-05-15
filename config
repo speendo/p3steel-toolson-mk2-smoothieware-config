@@ -53,13 +53,13 @@ gamma_max_rate                               300.0            # Maximum rate in 
 ## Extruder module configuration
 # See http://smoothieware.org/extruder
 extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
-extruder.hotend.steps_per_mm                    140           # Steps per mm for extruder stepper
+extruder.hotend.steps_per_mm                    307.96421339           # Steps per mm for extruder stepper
 extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
 extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec²
 extruder.hotend.max_speed                       50            # Maximum speed in mm/s
 
 extruder.hotend.step_pin                        2.3           # Pin for extruder step signal
-extruder.hotend.dir_pin                         0.22          # Pin for extruder dir signal ( add '!' to reverse direction )
+extruder.hotend.dir_pin                         0.22!          # Pin for extruder dir signal ( add '!' to reverse direction )
 extruder.hotend.en_pin                          0.21          # Pin for extruder enable signal
 
 # Extruder offset
@@ -116,7 +116,9 @@ laser_module_pwm_pin                          2.5             # This pin will be
 temperature_control.hotend.enable            true             # Whether to activate this ( "hotend" ) module at all.
 temperature_control.hotend.thermistor_pin    0.23             # Pin for the thermistor to read
 temperature_control.hotend.heater_pin        2.7              # Pin that controls the heater, set to nc if a readonly thermistor is being defined
-temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
+temperature_control.hotend.coefficients 0.000791814178228378,0.000201041664695367,0.000000162269500947 # values for NTC3950
+# calculated with @calc_thermistor 25,100000.0,150,1770.0,240,273.7
+#temperature_control.hotend.thermistor        EPCOS100K        # See http://smoothieware.org/temperaturecontrol#toc5
 #temperature_control.hotend.beta             4066             # Or set the beta value
 temperature_control.hotend.set_m_code        104              # M-code to set the temperature for this module
 temperature_control.hotend.set_and_wait_m_code 109            # M-code to set-and-wait for this module
@@ -157,7 +159,9 @@ temperature_control.hotend.designator        T                # Designator lette
 temperature_control.bed.enable               true             # Whether to activate this ( "hotend" ) module at all.
 temperature_control.bed.thermistor_pin       0.24             # Pin for the thermistor to read
 temperature_control.bed.heater_pin           2.5              # Pin that controls the heater
-temperature_control.bed.thermistor           Honeywell100K    # See http://smoothieware.org/temperaturecontrol#thermistor
+temperature_control.bed.coefficients 0.000791814178228378,0.000201041664695367,0.000000162269500947 # values for NTC3950
+# calculated with @calc_thermistor 25,100000.0,150,1770.0,240,273.7
+#temperature_control.bed.thermistor           Honeywell100K    # See http://smoothieware.org/temperaturecontrol#thermistor
 #temperature_control.bed.beta                3974             # Or set the beta value
 temperature_control.bed.set_m_code           140              # M-code to set the temperature for this module
 temperature_control.bed.set_and_wait_m_code  190              # M-code to set-and-wait for this module
@@ -179,24 +183,24 @@ switch.partfan.output_pin                        2.4              # Pin this mod
 switch.partfan.output_type                       pwm              # PWM output settable with S parameter in the input_on_comand
 switch.partfan.max_pwm                          255              # Set max pwm for the pin default is 255
 
-switch.extfan.enable                          true             # Enable this module
-switch.extfan.input_on_command                M42              # Command that will turn this switch on
-switch.extfan.input_off_command               M43              # Command that will turn this switch off
-switch.extfan.output_pin                      2.6              # Pin this module controls
-switch.extfan.output_type                     pwm          # Digital means this is just an on or off pin
-switch.extfan.max_pwm                          255              # Set max pwm for the pin default is 255
+switch.hotendfan.enable                          true             # Enable this module
+switch.hotendfan.input_on_command                M42              # Command that will turn this switch on
+switch.hotendfan.input_off_command               M43              # Command that will turn this switch off
+switch.hotendfan.output_pin                      2.6              # Pin this module controls
+switch.hotendfan.output_type                     pwm          # Digital means this is just an on or off pin
+switch.hotendfan.max_pwm                          255              # Set max pwm for the pin default is 255
 
 
 ## Temperatureswitch
 # See http://smoothieware.org/temperatureswitch
 # Automatically toggle a switch at a specified temperature. Different ones of these may be defined to monitor different temperatures and switch different swithxes
 # Useful to turn on a fan or water pump to cool the hotend
-#temperatureswitch.hotend.enable              true            #
-#temperatureswitch.hotend.designator          T               # first character of the temperature control designator to use as the temperature sensor to monitor
-#temperatureswitch.hotend.switch              misc            # select which switch to use, matches the name of the defined switch
-#temperatureswitch.hotend.threshold_temp      60.0            # temperature to turn on (if rising) or off the switch
-#temperatureswitch.hotend.heatup_poll         15              # poll heatup at 15 sec intervals
-#temperatureswitch.hotend.cooldown_poll       60              # poll cooldown at 60 sec intervals
+temperatureswitch.hotend.enable              true            #
+temperatureswitch.hotend.designator          T               # first character of the temperature control designator to use as the temperature sensor to monitor
+temperatureswitch.hotend.switch              hotendfan            # select which switch to use, matches the name of the defined switch
+temperatureswitch.hotend.threshold_temp      60.0            # temperature to turn on (if rising) or off the switch
+temperatureswitch.hotend.heatup_poll         15              # poll heatup at 15 sec intervals
+temperatureswitch.hotend.cooldown_poll       60              # poll cooldown at 60 sec intervals
 
 ## Endstops
 # See http://smoothieware.org/endstops
@@ -327,7 +331,7 @@ custom_menu.power_off.command              M81               #
 
 ## Network settings
 # See http://smoothieware.org/network
-network.enable                               true             # Enable the ethernet network services
+network.enable                               false             # Enable the ethernet network services
 network.webserver.enable                     true             # Enable the webserver
 network.telnet.enable                        true             # Enable the telnet server
 network.ip_address                           auto             # Use dhcp to get ip address
