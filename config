@@ -225,13 +225,13 @@ endstops_enable                              true             # The endstop modu
 alpha_min_endstop                            1.24^!            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 #alpha_max_endstop                           1.25^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 alpha_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-alpha_min                                    -25                # This gets loaded as the current position after homing when home_to_min is set
-alpha_max                                    200              # This gets loaded as the current position after homing when home_to_max is set
+alpha_min                                    -23.5                # This gets loaded as the current position after homing when home_to_min is set
+alpha_max                                    214              # This gets loaded as the current position after homing when home_to_max is set
 beta_min_endstop                             1.26^!            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 #beta_max_endstop                            1.27^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 beta_homing_direction                        home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
-beta_min                                     -22                # This gets loaded as the current position after homing when home_to_min is set
-beta_max                                     200              # This gets loaded as the current position after homing when home_to_max is set
+beta_min                                     -14.5                # This gets loaded as the current position after homing when home_to_min is set
+beta_max                                     214              # This gets loaded as the current position after homing when home_to_max is set
 gamma_min_endstop                            1.28^!            # Pin to read min endstop, add a ! to invert if endstop is NO connected to ground
 #gamma_max_endstop                           1.29^            # Pin to read max endstop, uncomment this and comment the above if using max endstops
 gamma_homing_direction                       home_to_min      # Or set to home_to_max and set alpha_max and uncomment the alpha_max_endstop
@@ -244,10 +244,10 @@ gamma_max_travel                             210              # Max travel in mm
 
 # Soft endstops
 soft_endstop.enable         true         # Enable soft endstops
-soft_endstop.x_min          -25          # Minimum X position
+soft_endstop.x_min          -23.5          # Minimum X position
 soft_endstop.x_max          240          # Maximum X position
-soft_endstop.y_min          -22          # Minimum Y position
-soft_endstop.y_max          200          # Maximum Y position
+soft_endstop.y_min          -14.5          # Minimum Y position
+soft_endstop.y_max          210.5          # Maximum Y position
 soft_endstop.z_min          0            # Minimum Z position
 soft_endstop.z_max          205          # Maximum Z position
 soft_endstop.halt           true         # Whether to issue a HALT state when hitting a soft endstop (if false, will just ignore commands that would exceed the limit)
