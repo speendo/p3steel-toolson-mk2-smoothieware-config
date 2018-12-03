@@ -344,6 +344,16 @@ custom_menu.power_off.enable               true              #
 custom_menu.power_off.name                 Power_off         #
 custom_menu.power_off.command              M81               #
 
+panel.enable true
+panel.lcd reprap_discount_glcd
+panel.spi_channel 0
+panel.spi_cs_pin 0.16
+panel.encoder_a_pin 3.25!^
+panel.encoder_b_pin 3.26!^
+panel.encoder_resolution 4
+panel.click_button_pin 1.30!^
+banel.buzz_pin 1.31
+panel.back_button_pin 2.11!^
 
 ## Network settings
 # See http://smoothieware.org/network
